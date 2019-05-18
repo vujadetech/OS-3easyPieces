@@ -4,7 +4,7 @@
 #include "common.h"
 
 int main(int argc, char *argv[]) {
-    if (argc != 2) {
+    if (argc < 2) {
 	fprintf(stderr, "usage: mem <value>\n");
 	exit(1);
   }
@@ -13,7 +13,9 @@ int main(int argc, char *argv[]) {
     assert(p != NULL);
     printf("(%d) addr pointed to by p: %p\n", (int) getpid(), p);
     *p = atoi(argv[1]); // assign value to addr stored in p
-    while (int k < atoi(argv[2])) {
+    int k = 0;
+    while (k < atoi(argv[2])) {
+      k++;
     	Spin(1);
     	*p = *p + 1;
     	printf("(%d) value of p: %d\n", getpid(), *p);
